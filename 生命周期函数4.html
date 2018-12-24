@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>生命周期函数</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="modify msg" @click="msg='ON'">
+        <h3 id="h3">{{ msg }}</h3>
+    </div>
+
+    <script>
+     // 创建 Vue 实例，得到 ViewModel
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:'ok'
+            },
+            methods:{
+                show(){
+                    console.log('执行了 show 方法')
+                }
+            },
+            // 1.
+            // 创建期间的生命周期函数
+            // 这是第一个生命周期函数
+            //表示实例在创建出来之前  执行 (此时  data 和 methods 中的数据都还没有初始化)
+            //比如:撰写手稿的  分析模板  思路条例罗列
+            beforeCreate(){
+                // console.log(this.msg)
+                // this.show()
+
+            },
+            // 这是第二个生命周期函数
+            //(此时  data 和 methods 都已经被初始化好了   最早   只能在  created  中操作)
+            //比如: 撰写的手稿材料文字 已经找好
+            created(){
+                // console.log(this.msg)
+                // this.show()
+
+            },
+            // 这是第三个生命周期函数
+            //模板内容已经在  内存 中 编辑完成了 ,但是   还没渲染到页面中
+            //比如:手稿材料已经整理好了 但还没写入
+            beforeMout(){
+                // console.log(document.getElementById('h3').innerText)
+            },
+            // 这是第四个生命周期函数
+            //这时候的内容   已经  挂载  到  页面中了,此时 用户已经能体验
+            //(如果接下来  没有 任何操作了  这个实例   就静静的呆着  内存中   一动不动)
+            mounted(){
+                // console.log(document.getElementById('h3').innerText)
+
+            },
+
+
+            //  2.
+            // 运行期间的生命周期函数
+            // 这是第五个生命周期函数
+            //这个 时候  界面还没有  被更新  【数据被更新了吗？  数据肯定被更新了】
+            // 执行了之后   页面中的现实数据还是旧的  此时data 数据是最新的. 页面  和  data 不保持同步
+            beforeUpdate(){
+                //  console.log('界面上元素的内容：' + document.getElementById('h3').innerText)
+                //  console.log('data 中的 msg 数据是：' + this.msg) 
+            },
+            // 这是第六个生命周期函数
+            // 当 updated  事件执行时候  页面和 data 数据已经保持同步了   都是最新的了
+            updated(){
+                // console.log('界面上元素的内容：' + document.getElementById('h3').innerText)
+                // console.log('data 中的 msg 数据是：' + this.msg)
+            },
+
+
+            // 3.
+            // 销毁期间的生命周期函数
+            // 这是第七个生命周期函数
+            beforeDestroy(){
+
+            },
+
+            // 这是第八个生命周期函数
+            deStroyed(){
+
+            }
+
+        })
+    
+    </script>
+</body>
+</html>
